@@ -1,0 +1,347 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+# COCO128 dataset https://www.kaggle.com/ultralytics/coco128 (first 128 images from COCO train2017) by Ultralytics
+# Example usage: python train.py --data coco128.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── coco128  ← downloads here (7 MB)
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../222_data # dataset root dir
+train: ../222_data/train2017.txt  # train images (relative to 'path') 128 images
+val: ../222_data/val2017.txt  # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+# Classes
+nc: 308  # number of classes
+# names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
+#         'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
+#         'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
+#         'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard',
+#         'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+#         'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch',
+#         'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone',
+#         'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear',
+#         'hair drier', 'toothbrush']  # class names
+
+names:
+  0: play_phone                       # 人
+  1: bicycle                          # 自行车
+  2: car                              # 汽车
+  3: motorbike                        # 摩托车
+  4: aeroplane                        # 飞机
+  5: bus                              # 公共汽车
+  6: train                            # 火车
+  7: truck                            # 卡车
+  8: boat                             # 船
+  9: traffic light                    # 交通灯
+  10: fire hydrant                    # 消防栓
+  11: stop sign                       # 停车标志
+  12: parking meter                   # 停车收费表
+  13: bench                           # 长凳
+  14: bird                            # 鸟
+  15: cat                             # 猫
+  16: dog                             # 狗
+  17: horse                           # 马
+  18: sheep                           # 羊
+  19: cow                             # 母牛
+  20: elephant                        # 大象
+  21: bear                            # 熊
+  22: zebra                           # 斑马
+  23: giraffe                         # 长颈鹿
+  24: backpack                        # 背包
+  25: umbrella                        # 雨伞
+  26: handbag                         # 手提包
+  27: tie                             # 领带
+  28: suitcase                        # 手提箱
+  29: frisbee                         # 飞盘
+  30: skis                            # 滑雪板
+  31: snowboard                       # 滑雪板
+  32: sports ball                     # 运动球
+  33: kite                            # 风筝
+  34: baseball bat                    # 棒球棍
+  35: baseball glove                  # 棒球手套
+  36: skateboard                      # 滑板
+  37: surfboard                       # 冲浪板
+  38: tennis racket                   # 网球拍
+  39: bottle                          # 瓶子
+  40: wine glass                      # 酒杯
+  41: cup                             # 杯子
+  42: fork                            # 叉
+  43: knife                           # 刀
+  44: spoon                           # 勺子
+  45: bowl                            # 碗
+  46: banana                          # 香蕉
+  47: apple                           # 苹果
+  48: sandwich                        # 三明治
+  49: orange                          # 橙色
+  50: broccoli                        # 西兰花
+  51: carrot                          # 胡萝卜
+  52: hot dog                         # 热狗
+  53: pizza                           # 披萨
+  54: donut                           # 甜甜圈
+  55: cake                            # 糕饼
+  56: chair                           # 椅子
+  57: sofa                            # 沙发
+  58: pottedplant                     # 盆栽植物
+  59: bed                             # 床
+  60: diningtable                     # 餐桌
+  61: toilet                          # 坐便器
+  62: tvmonitor                       # 电视监视器
+  63: laptop                          # 笔记本电脑
+  64: mouse                           # 老鼠
+  65: remote                          # 遥远的
+  66: keyboard                        # 键盘
+  67: cell phone                      # 手机
+  68: microwave                       # 微波炉
+  69: oven                            # 烤箱
+  70: toaster                         # 烤面包机
+  71: sink                            # 下沉
+  72: refrigerator                    # 冰箱
+  73: book                            # 书
+  74: clock                           # 时钟
+  75: vase                            # 花瓶
+  76: scissors                        # 剪刀
+  77: teddy bear                      # 泰迪熊
+  78: hair drier                      # 吹风机
+  79: toothbrush                      # 牙刷
+  80: x                               # Reserved
+
+  81: seal                            # 苫盖材料   # 工地 
+  82: bare                            # 裸露黄土  
+  83: flame                           # 明火  
+  84: smoke                           # 明烟  
+  85: continuous_pit_guard            # 连续护栏  
+  86: discontinuous_pit_guard         # 非连续护栏  
+  87: person_pit                      # 有人翻越基坑  
+  88: person_car_entry                # 人员或车辆出入口  
+  89: continuous_roof_guard           # 楼顶作业面连续护栏  
+  90: discontinuous_roof_guard        # 楼顶作业面非连续护栏  
+  91: continuous_cave_guard           # 作业面洞口连续护栏  
+  92: discontinuous_cave_guard        # 作业面洞口非连续护栏  
+  93: washing_vehicle                 # 洗轮机喷水清洗车辆  
+  94: unwash                          # 洗轮机未喷水  
+  95: safety_helmet                   # 安全帽  
+  96: supervisor                      # 监管人员  
+  97: fire_hydrant                    # 消防栓  
+  98: fire_box                        # 消防箱  
+  99: fire_extinguisher               # 灭火器  
+  100: muck_truck                     # 渣土车  
+  101: bulldozer                      # 推土机  
+  102: loader                         # 装载机  
+  103: excavator                      # 挖掘机  
+  104: excavator_loader               # 挖掘装载机  
+  105: roadroller                     # 压路机  
+  106: forklift                       # 叉车  
+  107: grader                         # 平地机  
+  108: piledriver                     # 桩机  
+  109: crane                          # 起重机  
+  110: blue_plate                     # 环保车牌  
+  111: loader_lifting                 # 装载机的伸展态  
+  112: excavator_digging              # 挖掘机的伸展态  
+  113: crane_sling                    # 起重机有吊重物 
+
+  114: blocked_fire_door              # 写字楼消防门堵塞 # 工联院
+  115: rat                            # 老鼠
+  116: covered_garbagecan             # 垃圾桶盖上
+  117: uncovered_garbagecan           # 垃圾桶未盖                    垃圾桶未满，没有盖上
+  118: chef_hat                       # 戴帽子
+  119: no_chef_hat                    # 未戴帽子
+  120: upper_wear                     # 穿上衣
+  121: no_upper_wear                  # 未穿上衣
+  122: lower_wear                     # 着下装
+  123: no_lower_wear                  # 未着下装
+  124: mobile_phone                   # 手机
+  125: playing_phone                  # 玩手机
+  126: head                           # 头
+  127: hand                           # 手
+  128: microbus                       # 小巴
+  129: car                            # 汽车
+  130: SUV                            # 越野车
+  131: van                            # 厢式货车
+  132: bus                            # 公共汽车
+  133: slagcar                        # slagcar
+  134: truck                          # 卡车
+  135: fire_truck                     # 消防车
+  136: police_car                     # 警车
+  137: project_vehicle                # 项目车辆
+  138: sleep                          # 睡岗
+  139: unsleep                        # 未睡岗
+  140: smoking                        # 吸烟
+  141: mask                           # 戴口罩
+  142: face                           # 人脸
+  143: fall                           # 人员跌倒
+  144: garbage                        # 垃圾
+  145: garbage_bin                    # 垃圾桶
+  146: overflow                       # 垃圾桶满溢
+  
+  147: occupat_fire_passage           # 消防通道占用
+  148: high_throw                     # 高空抛物
+  149: person_gates                   # 人行道闸
+  150: roadway_gates                  # 车行道闸
+  151: roadway_barriers               # 车行道闸杆
+  152: roadway_barriers_opened        # 车行道闸杆打开
+  153: illegal_umbrella               # 违规撑伞 禁止撑伞区域（街面或店面门口）
+  154: fire_passage                   # 消防通道
+  155: None
+  156: None
+  157: None
+  158: None
+  159: None
+  160: None
+  161: None
+  162: None
+  163: None
+  164: None
+  165: None
+  166: None
+  167: None
+  168: None
+  169: None
+  170: None
+  171: None
+  172: None
+  173: None
+  174: None
+  175: None
+  176: None
+  177: None
+  178: None
+  179: None
+  180: None
+  181: None
+  182: None
+  183: tricycle                       ##三轮车
+  184: schoolbus                      # 校车
+  185: sanitation_truck               # 环卫车
+  186: sprinkler                      # 洒水车
+  187: refrigerated_truck             # 冷藏车
+  188: fire_truck                     ##消防车
+  189: None
+  190: None
+  191: None
+  192: None
+  193: None
+  194: None
+  195: None
+  196: None
+  197: None
+  198: None
+  199: None
+
+  ##dcg
+  200: Exposed_garbage                # 0102  暴露垃圾               ???不能归为其他类别（）的垃圾，无明显责任范围的垃圾？？？？怎么和0104区分
+  201: Accumulated_garbage            # 0103  积存垃圾渣土           ???成堆的垃圾、渣土
+  202: Dirty_roads                    # 0104  道路不洁               ???应和门前保洁有区别，这里只看道路上的
+  203: Dirty_greenspaces              # 0106  绿地脏乱
+  204: Abandoned_vehicle              # 0107  废弃车辆
+  205: Abandoned_furniture            # 0108  废弃家具设备
+  206: Tree_hanging                   # 0109  非装饰性树挂           树上的塑料袋、风筝，如果树不临街，衣服也算
+  207: Road_damage                    # 0110  道路破损
+  208: Road_debris                    # 0112  道路遗撒               指渣土车因转向、颠婆导致渣土遗撒
+  209: Dirty_exterior_facade          # 0113  建筑物外立面不洁       这里指门前三包的立面
+  210: Front_door_cleaning            # 0198  门前保洁               ???这里应该指纵向，“门前三包”管理范围：纵向 ：沿街单位和个人住户所使用和管理的建筑物门前外侧至人行道外沿的范围；横向 ：沿街建筑物总长及周边空地；立面 ：建筑物的外立面。
+  211: Illegal_small_advertisement    # 0201  非法小广告             小广告
+  212: Illegal_outdoor_advertiement   # 0202  违规户外广告           海报等大张的宣传材料
+  213: Distribute_advertisement       # 0204  街头散发广告           某人散发广告，宣传页等
+  214: Violation_slogan               # 0298  违规标语宣传品         条幅、标语
+  215: Other_advertisement            # 0299  其他宣传广告问题       ???
+  216: Construction_waste_materials   # 0303  施工废弃料             ???施工产生的废弃料，目前看主要是家庭装修
+  217: Other_construction_issues      # 0399  其它施工管理问题       ???
+  218: Road_waterlogging              # 0406  道路积水               无雪，无冰
+  219: Road_snow_and_ice              # 0407  道路积雪结冰
+  220: Overhead_cables                # 0408  架空线缆不规范
+  221: Travel_merchant                # 0501  无照经营游商           无固定营业地点，可能用的是自行车，三轮车，汽车后备箱
+  222: Off_store                      # 0504  店外经营               店外摆放了商品
+  223: Motor_vehicles_random_park     # 0505  机动车乱停放           机动车乱停在非行驶道路，道路上和路边临时停靠的要注意（或讨论）
+  224: Non_motor_vehicles_random_park # 0506  非机动车乱停放         自行车、三轮车乱停，目前自行车居多
+  225: Materials_random_stack         # 0507  乱堆物堆料             ??? 堆的是有用的
+  226: Hanging_along_street           # 0511  沿街晾挂               沿街晾挂衣服，需要晒干的食品等，不包含树上的挂
+  227: Occupying_tactile_paving       # 0513  占压盲道               机动车或非机动车压（跨）在盲道
+  228: Other_street_order             # 0598  其它街面秩序问题       ???
+  229: Dust_emission                  # 1105  沿街道路扬尘           能看到街道上扬起来的尘土
+  
+  230: Roadside_booths                #       占道经营               有人，有摊，有货，道路
+  231: None
+  232: None
+  233: None
+  234: None
+  235: Blender                        # 搅拌机
+  236: None
+  237: None
+  238: None
+  239: None
+  240: None
+  241: None
+  242: None
+  243: None
+  244: None
+  245: None
+  246: None
+  247: None
+  248: Ambulance                      # 救护车
+  249: None
+  250: None
+  251: None
+  252: None
+  253: None
+  254: None
+  255: None
+  256: None
+  257: None
+  258: None
+  259: None
+  260: None
+  261: None
+  262: None
+  263: None
+  264: None
+  265: None
+  266: None
+  267: None
+  268: None
+  269: None
+  270: None
+  271: None
+  272: None
+  273: None
+  274: None
+  275: None
+  276: None
+  277: None
+  278: None
+  279: None
+  280: None
+  281: None
+  282: None
+  283: None
+  284: None
+  285: None
+  286: None
+  287: None
+  288: None
+  289: None
+  290: None
+  291: None
+  292: None
+  293: None
+  294: None
+  295: None
+  296: None
+  297: None
+  298: None
+  299: None
+  
+  ##ztc
+  300: ztc_uncover                    # 未苫盖                       车上有东西，但没有苫盖
+  301: ztc_full                       # 满载                         满载有苫盖
+  302: ztc_refit                      # 改装                         改变车身高度、长度或宽度
+  303: ztc_lpr_deface                 # 车牌污损                     车牌无法识别，但无明显遮挡物
+  304: ztc_lpr_occlusion              # 车牌遮挡                     车牌有明显的遮挡物
+  305: ztc                            # 渣土车
+  306: ztc_muddy_wheel                # 车轮带泥                                          
+  307: ztc_scattering                 # 道路遗撒                     同时有渣土车和道路遗撒（0112）
+
+# Download script/URL (optional)
+# download: https://ultralytics.com/assets/coco128.zip
